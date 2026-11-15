@@ -1,0 +1,63 @@
+// SQLite en local pour démarrer vite.
+// Pour passer à PostgreSQL : provider = "postgresql" et DATABASE_URL="postgresql://..."
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String      @id @default(cuid())
+  name         String
+  email        String      @unique
+  passwordHash String
+  createdAt    DateTime    @default(now())
+  interviews   Interview[]
+}
+
+model Interview {
+  id            String    @id @default(cuid())
+  userId        String?
+  user          User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role          String // id d'un poste type, ou "offre" pour un entretien basé sur une offre
+  level         String
+  jobTitle      String? // intitulé saisi par l'utilisateur (mode offre)
+  jobDescription String? // texte de l'offre collée (mode offre)
+  status        String    @default("IN_PROGRESS") // IN_PROGRESS | COMPLETED
+  questionCount Int       @default(0)
+  maxQuestions  Int       @default(6)
+  createdAt     DateTime  @default(now())
+  messages      Message[]
+  report        Report?
+
+  @@index([userId])
+}
+
+model Message {
+  id          String    @id @default(cuid())
+  interviewId String
+  author      String // "interviewer" | "candidate"
+  content     String
+  createdAt   DateTime  @default(now())
+  interview   Interview @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+
+  @@index([interviewId])
+}
+
+model Report {
+  id           String    @id @default(cuid())
+  interviewId  String    @unique
+  overallScore Int
+  summary      String
+  // Champs JSON stockés en texte (compatibilité SQLite)
+  skills       String
+  strengths    String
+  weaknesses   String
+  advice       String
+  createdAt    DateTime  @default(now())
+  interview    Interview @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+}
