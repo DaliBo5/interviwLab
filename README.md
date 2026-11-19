@@ -74,14 +74,4 @@ src/app/history/page.tsx          Historique des entretiens
 2. `POST /api/interviews/:id/messages` enregistre la réponse et renvoie la question suivante. Le recruteur adapte la difficulté et relance si besoin.
 3. Après la dernière question (ou avec « Terminer maintenant »), l'évaluateur analyse la transcription et renvoie un rapport JSON, enregistré en base.
 
-## Feuille de route
 
-- [x] Comptes utilisateurs (inscription, connexion, entretiens privés)
-- [ ] Connexion Google / GitHub, mot de passe oublié
-- [ ] Réponses en streaming
-- [ ] Exercice de code en direct (Monaco Editor + exécution via Judge0)
-- [x] Mode « à partir d'une offre » : entretien généré depuis une offre d'emploi collée
-- [ ] Banque de questions en RAG (pgvector)
-- [ ] Entretien vocal (Whisper + synthèse vocale)
-- [ ] Tableau de progression dans le temps
-- [ ] Passage à PostgreSQL, Docker, CI/CD GitHub Actions, déploiement Vercel
