@@ -5,8 +5,8 @@ Plateforme d'entraînement aux entretiens techniques. Un recruteur IA pose des q
 ## Stack
 
 - **Next.js 15** (App Router) + **TypeScript** + **Tailwind CSS**
-- **Prisma** + **SQLite** en local (facile à passer sur PostgreSQL)
-- **LLM** via n'importe quelle API compatible OpenAI (Groq gratuit, OpenAI, Mistral, Ollama…)
+- **Prisma** + **SQLite** en local 
+- **LLM** via n'importe quelle API Groq 
 
 ## Lancer le projet (Windows)
 
